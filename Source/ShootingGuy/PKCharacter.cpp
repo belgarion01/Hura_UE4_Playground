@@ -9,6 +9,7 @@ APKCharacter::APKCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
+	// Spawn and Setup the spring arm
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
 	SpringArm->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 	SpringArm->TargetArmLength = 1000.f;
@@ -17,10 +18,12 @@ APKCharacter::APKCharacter()
 	SpringArm->bInheritPitch = false;
 	SpringArm->bInheritYaw = false;
 	SpringArm->bInheritRoll = false;
-	
+
+	// Spawn and Setup the camera
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Main Camera"));
 	Camera->AttachToComponent(SpringArm, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 
+	// Setup rotation with movement
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->RotationRate = FRotator(0.f, 1000.f, 0.f);
 }
